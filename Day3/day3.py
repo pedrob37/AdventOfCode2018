@@ -15,7 +15,7 @@ for row in range(len(lines)):
     spec_array[row, :] = [int(x) for x in split_list[1:]]
 
 # Create large array (fabric square)
-square = np.zeros([10000, 10000])
+square = np.zeros([1000, 1000])
 for row in range(len(lines)):
     spec_list = spec_array[row, :]
     X = spec_list[0]
@@ -30,9 +30,7 @@ print(overlap_count)
 
 # %% Part Two: Overlapping squares
 # How to know ID claim that remained un-overlapped?
-# Assign each "sum" a power of two
-# Summing powers of 2 =/= power of 2
-#import copy
+# Repeat part one to create overlapping grid
 square = np.zeros([1000, 1000])
 for row in range(len(lines)):
     spec_list = spec_array[row, :]
@@ -43,9 +41,9 @@ for row in range(len(lines)):
     square[Y:Y+H, X:X+W] += 1
 
 # Want to find the piece of fabric that only creates zeros when subtracted
+# Do this by checking if number of new zeros == area of patch
 zero_count = 1e6 - np.count_nonzero(square)
 for row in range(len(lines)):
-    # square_copy = copy.deepcopy(square)
     spec_list = spec_array[row, :]
     X = spec_list[0]
     Y = spec_list[1]
